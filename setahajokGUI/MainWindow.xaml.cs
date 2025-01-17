@@ -79,5 +79,19 @@ namespace setahajokGUI
                 else recommendedBoatLabel.Content = "Sajnos nem tudunk hajót ajánlani";
             }
         }
+
+        private void allBoatsFeeForRequestedDaysButton_Click(object sender, RoutedEventArgs e)
+        {
+            var daysCount = daysTextboxAllBoats.Text;
+            if (daysCount != null && int.TryParse(daysCount, out int daysCountInt))
+            {
+                totalOverallPriceLabel.Content = $"{daysCountInt} napi költség: {getFeeForRequestedDays(daysCountInt)} FT";
+            }
+        }
+
+        private int getFeeForRequestedDays(int days)
+        {
+            return days * boats.Sum(b => b.FeePrice);
+        }
     }
 }
